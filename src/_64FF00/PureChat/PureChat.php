@@ -2,6 +2,7 @@
 
 namespace _64FF00\PureChat;
 
+use _64FF00\PureChat\factions\FactionMaster;
 use _64FF00\PureChat\factions\FactionsInterface;
 use _64FF00\PureChat\factions\FactionsProNew;
 use _64FF00\PureChat\factions\FactionsProOld;
@@ -386,6 +387,20 @@ class PureChat extends PluginBase
 
                     break;
 
+                case 'FactionMaster':
+
+                    if ($this->getServer()->getPluginManager()->getPlugin("FactionMaster") !== null)
+                    {
+                        $this->factionsAPI = new FactionMaster();
+
+                        $this->getLogger()->notice("FactionMaster support enabled.");
+
+                        break;
+                    }
+
+                    $this->getLogger()->notice("No valid factions plugin in default-factions-plugin node was found. Disabling factions plugin support.");
+
+                    break;
                 default:
 
                     $this->getLogger()->notice("No valid factions plugin in default-factions-plugin node was found. Disabling factions plugin support.");
