@@ -304,32 +304,11 @@ class PureChat extends PluginBase {
 	}
 
 	private function loadFactionsPlugin() {
-		$factionsPluginName = $this->config->get("default-factions-plugin");
-
-		if ($factionsPluginName === null) {
-			$this->getLogger()->notice("No valid factions plugin in default-factions-plugin node was found. Disabling factions plugin support.");
-		} else {
-			switch (strtolower($factionsPluginName)) {
-				case 'factionmaster':
-
-					if ($this->getServer()->getPluginManager()->getPlugin("FactionMaster") !== null) {
-						$this->factionsAPI = new FactionMaster();
-
-						$this->getLogger()->notice("FactionMaster support enabled.");
-
-						break;
-					}
-
-					$this->getLogger()->notice("No valid factions plugin in default-factions-plugin node was found. Disabling factions plugin support.");
-
-					break;
-				default:
-
-					$this->getLogger()->notice("No valid factions plugin in default-factions-plugin node was found. Disabling factions plugin support.");
-
-					break;
-			}
+		if ($this->getServer()->getPluginManager()->getPlugin("FactionMaster") !== null) {
+			$this->factionsAPI = new FactionMaster();
+			$this->getLogger()->notice("FactionMaster support enabled.");
 		}
+		$this->getLogger()->notice("No valid FactionMaster instance found, to enable FactionMaster support, please install FactionMaster.");
 	}
 
 	/*
